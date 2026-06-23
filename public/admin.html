@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>防伪追溯后台</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="admin-body">
+    <section class="login-panel" id="loginPanel">
+      <form class="login-card" id="loginForm">
+        <h1>后台登录</h1>
+        <p>使用 Cloudflare 环境变量 <code>ADMIN_PASSWORD</code> 设置的密码登录。</p>
+        <label>
+          管理员密码
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">登录</button>
+        <div class="form-message" id="loginMessage"></div>
+      </form>
+    </section>
+
+    <main class="admin-app is-hidden" id="adminApp">
+      <header class="admin-topbar">
+        <div>
+          <h1>防伪追溯后台</h1>
+          <p>产品、二维码、扫码日志与 CSV 导出</p>
+        </div>
+        <button type="button" id="logoutButton">退出登录</button>
+      </header>
+
+      <div class="admin-status" id="adminStatus"></div>
+
+      <section class="admin-section">
+        <div class="section-title">
+          <h2>产品管理</h2>
+          <button type="button" id="resetProductForm">新增产品</button>
+        </div>
+        <form class="product-form" id="productForm">
+          <input type="hidden" name="id">
+          <label>品牌<input name="brand" required placeholder="席士博农业科技"></label>
+          <label>产品名称<input name="name" required placeholder="高效水溶肥"></label>
+          <label>主要技术指标<textarea name="specs" rows="3" placeholder="N-P-K >= 52%；水分 <= 0.5%"></textarea></label>
+          <label>净重 / 规格<input name="weight" placeholder="25 kg"></label>
+          <label>生产批号<input name="batch_no" placeholder="HL 251220 2A"></label>
+          <label>生产日期<input name="production_date" type="date"></label>
+          <label>生产商<input name="manufacturer" placeholder="席士博农业科技有限公司"></label>
+          <label>产品图片 URL<input name="image_url" placeholder="https://example.com/product.jpg"></label>
+          <label class="wide-field">产品详情<textarea name="description" rows="3"></textarea></label>
+          <div class="form-actions">
+            <button type="submit">保存产品</button>
+            <button type="button" class="ghost-button" id="cancelEditButton">取消编辑</button>
+          </div>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>品牌</th>
+                <th>产品名称</th>
+                <th>批号</th>
+                <th>码数量</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="productsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="section-title">
+          <h2>批量生成防伪码</h2>
+        </div>
+        <form class="inline-form" id="generateForm">
+          <label>选择产品<select name="product_id" id="generateProductSelect" required></select></label>
+          <label>生成数量<input name="count" type="number" min="1" max="1000" value="20"></label>
+          <button type="submit">生成</button>
+          <button type="button" class="ghost-button" id="exportButton">导出 CSV</button>
+        </form>
+        <pre class="generated-output" id="generatedOutput"></pre>
+      </section>
+
+      <section class="admin-section">
+        <div class="section-title">
+          <h2>防伪码列表</h2>
+        </div>
+        <form class="inline-form" id="codeFilterForm">
+          <label>产品筛选<select id="codeProductFilter"><option value="">全部产品</option></select></label>
+          <label>状态<select id="codeStatusFilter"><option value="">全部状态</option><option value="normal">正常</option><option value="risk">风险</option><option value="disabled">作废</option></select></label>
+          <label>搜索码<input id="codeSearchInput" placeholder="输入部分防伪码"></label>
+          <button type="submit">查询</button>
+        </form>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>防伪码</th>
+                <th>产品</th>
+                <th>查询次数</th>
+                <th>首次查询</th>
+                <th>最近查询</th>
+                <th>状态</th>
+                <th>验证链接</th>
+              </tr>
+            </thead>
+            <tbody id="codesBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="section-title">
+          <h2>扫码日志</h2>
+          <button type="button" id="refreshLogsButton">刷新</button>
+        </div>
+        <form class="inline-form" id="logFilterForm">
+          <label>防伪码<input id="logCodeInput" placeholder="按完整防伪码筛选"></label>
+          <button type="submit">筛选日志</button>
+        </form>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>时间</th>
+                <th>防伪码</th>
+                <th>产品</th>
+                <th>IP</th>
+                <th>User-Agent</th>
+              </tr>
+            </thead>
+            <tbody id="logsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/admin.js" defer></script>
+  </body>
+</html>

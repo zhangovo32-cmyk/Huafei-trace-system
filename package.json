@@ -1,0 +1,15 @@
+{
+  "name": "product-qr-trace",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --compatibility-date=2026-06-23",
+    "db:init:local": "wrangler d1 execute product-qr-trace-db --local --file=./schema.sql",
+    "db:init:remote": "wrangler d1 execute product-qr-trace-db --remote --file=./schema.sql",
+    "deploy": "wrangler pages deploy public"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>席士博农业科技产品二维码追溯系统</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="index-body">
+    <main class="index-card">
+      <img class="index-logo" src="/assets/logo-placeholder.svg" alt="席士博农业科技">
+      <h1>席士博农业科技产品二维码追溯系统</h1>
+      <p>请输入防伪码，或扫码访问包装上的验证链接。</p>
+      <form id="quickCheckForm">
+        <input id="quickCode" inputmode="numeric" autocomplete="off" placeholder="例如 7532087070511313">
+        <button type="submit">立即查询</button>
+      </form>
+      <a class="admin-entry" href="/admin">进入后台管理</a>
+    </main>
+    <script>
+      document.getElementById("quickCheckForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        var code = document.getElementById("quickCode").value.trim();
+        if (code) window.location.href = "/check/" + encodeURIComponent(code);
+      });
+    </script>
+  </body>
+</html>

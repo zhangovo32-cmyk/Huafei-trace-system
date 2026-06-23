@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>席士博农业科技产品二维码追溯系统</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body class="check-body">
+    <main class="verify-shell">
+      <header class="brand-hero" aria-label="品牌区">
+        <div class="brand-row">
+          <img class="brand-logo" src="/assets/logo-placeholder.svg" alt="席士博农业科技">
+        </div>
+
+        <img class="factory-line" src="/assets/factory-line.svg" alt="">
+      </header>
+
+      <section class="verify-panel" id="verifyPanel">
+        <h1>席士博农业科技产品二维码追溯系统</h1>
+        <p class="code-line">防伪编码：<strong id="codeText">读取中</strong></p>
+        <p class="scan-line">当前产品已浏览过 <strong id="scanCount">0</strong> 次</p>
+        <p class="message-line" id="resultMessage">正在连接防伪中心...</p>
+        <p class="time-line">认证时间：<span id="certifiedTime">--</span></p>
+      </section>
+
+      <section class="state-card is-hidden" id="stateCard">
+        <strong id="stateTitle">核验提示</strong>
+        <p id="stateDetail"></p>
+      </section>
+
+      <section class="product-card is-loading" id="productCard" aria-label="产品信息">
+        <div class="product-media">
+          <img id="productImage" alt="产品图片" hidden>
+          <div class="bag-placeholder" id="productFallback" aria-hidden="true">
+            <div class="bag-top"></div>
+            <div class="bag-label">
+              <span>席士博</span>
+              <strong>PRODUCT</strong>
+              <em>25 kg</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <p><strong>品牌：</strong><span id="productBrand">--</span></p>
+          <p><strong>产品名称：</strong><span id="productName">--</span></p>
+          <p class="field-block"><strong>主要技术指标：</strong><span id="productSpecs">--</span></p>
+          <p><strong>净重：</strong><span id="productWeight">--</span></p>
+          <p><strong>生产批号：</strong><span id="productBatch">--</span></p>
+          <p><strong>生产日期：</strong><span id="productDate">--</span></p>
+          <p><strong>生产商：</strong><span id="productMaker">--</span></p>
+          <button class="more-link" id="moreButton" type="button">点击查看更多...</button>
+        </div>
+      </section>
+
+      <section class="product-detail is-hidden" id="productDetail"></section>
+
+      <section class="promo-banner" aria-label="活动入口">
+        <div>
+          <strong>种植服务活动入口</strong>
+          <span>登记作物信息，获取专属技术建议</span>
+        </div>
+      </section>
+
+      <section class="entry-grid" aria-label="功能入口">
+        <a class="entry-tile tile-green" href="javascript:void(0)">
+          <span>产品介绍</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <a class="entry-tile tile-cyan" href="javascript:void(0)">
+          <span>使用说明</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <a class="entry-tile tile-blue" href="javascript:void(0)">
+          <span>售后服务</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <a class="entry-tile tile-teal" href="javascript:void(0)">
+          <span>联系厂家</span>
+          <i aria-hidden="true"></i>
+        </a>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

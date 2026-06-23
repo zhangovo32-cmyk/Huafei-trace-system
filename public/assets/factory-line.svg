@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="210" viewBox="0 0 750 210" role="img" aria-label="企业工厂线稿">
+  <g fill="none" stroke="#b9dbf2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 172h700"/>
+    <path d="M92 172V120l42-30 42 30v52"/>
+    <path d="M124 172v-42h24v42"/>
+    <path d="M206 172V98l66-46 66 46v74"/>
+    <path d="M232 172V112h78v60"/>
+    <path d="M250 128h44M250 145h44"/>
+    <path d="M362 172V92h42v80M414 172V70h44v102"/>
+    <path d="M382 110h60M382 132h60"/>
+    <path d="M486 172v-54h36v54M540 172V94h28v78"/>
+    <path d="M586 172v-42h68v42M604 130v-26h32v26"/>
+    <path d="M666 172l34-30h30v30"/>
+    <path d="M35 140c18-16 36-16 54 0"/>
+    <path d="M562 48c14-16 37-14 46 4 21-4 34 11 31 29h-91c-6-16 2-29 14-33Z"/>
+    <path d="M90 64c10-9 24-8 31 2 13-1 22 8 21 20H73c-3-10 4-19 17-22Z"/>
+    <path d="M130 48l8 8m0-8-8 8M520 40l7 7m0-7-7 7M686 82l7 7m0-7-7 7"/>
+    <path d="M300 55l10 8 10-8"/>
+    <path d="M150 82c20-24 48-27 84-9M465 50c15-15 31-16 50-4"/>
+    <path d="M618 115h28M632 101v28"/>
+  </g>
+</svg>
