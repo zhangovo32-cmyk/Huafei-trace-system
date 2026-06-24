@@ -3,5 +3,5 @@ export async function onRequest(context) {
   url.pathname = "/preview.html";
   url.search = "";
 
- return Response.redirect(url.toString(), 302);
+  return fetch(new Request(url.toString(), context.request));
 }

@@ -23,6 +23,9 @@ const productFields = {
 };
 
 function getCodeFromPath() {
+  const queryCode = new URLSearchParams(window.location.search).get("code");
+  if (queryCode) return queryCode;
+
   const match = window.location.pathname.match(/\/check\/([^/?#]+)/);
   return match ? decodeURIComponent(match[1]) : "";
 }
