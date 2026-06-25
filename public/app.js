@@ -51,6 +51,11 @@ function setPanelLevel(level) {
   verifyPanel.classList.add(`is-${level || "success"}`);
 }
 
+function displayBrandName(brand) {
+  if (!brand || brand.includes("席士博")) return "三环";
+  return brand;
+}
+
 function setProduct(product) {
   if (!product) {
     productCard.classList.add("is-hidden");
@@ -60,7 +65,7 @@ function setProduct(product) {
   }
 
   productCard.classList.remove("is-hidden", "is-loading");
-  productFields.brand.textContent = product.brand || "--";
+  productFields.brand.textContent = displayBrandName(product.brand);
   productFields.name.textContent = product.name || "--";
   productFields.specs.textContent = product.specs || "--";
   productFields.weight.textContent = product.weight || "--";
