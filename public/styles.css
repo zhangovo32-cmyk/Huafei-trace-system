@@ -82,6 +82,10 @@ button {
   display: block;
 }
 
+.brand-logo-image {
+  width: 102px;
+}
+
 .brand-mark {
   position: relative;
   width: 43px;
@@ -475,6 +479,10 @@ button {
   height: auto;
   display: block;
   margin: 0 auto 18px;
+}
+
+.index-logo-image {
+  width: 132px;
 }
 
 .index-card h1 {
