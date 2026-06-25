@@ -7,16 +7,32 @@ export async function onRequestGet(context) {
 
   const url = new URL(context.request.url);
   const productId = Number.parseInt(url.searchParams.get("product_id") || "", 10);
+  const status = url.searchParams.get("status") || "";
+  const search = (url.searchParams.get("q") || "").trim();
   const params = [];
-  const where = Number.isFinite(productId) && productId > 0 ? "WHERE c.product_id = ?" : "";
-  if (where) params.push(productId);
+  const where = [];
+
+  if (Number.isFinite(productId) && productId > 0) {
+    where.push("c.product_id = ?");
+    params.push(productId);
+  }
+
+  if (["normal", "risk", "disabled"].includes(status)) {
+    where.push("c.status = ?");
+    params.push(status);
+  }
+
+  if (search) {
+    where.push("c.code LIKE ?");
+    params.push(`%${search}%`);
+  }
 
   const result = await context.env.DB
     .prepare(
       `SELECT c.code, p.name AS product_name, p.batch_no
        FROM codes c
        LEFT JOIN products p ON p.id = c.product_id
-       ${where}
+       ${where.length ? `WHERE ${where.join(" AND ")}` : ""}
        ORDER BY c.id DESC`
     )
     .bind(...params)

@@ -14,8 +14,13 @@ const codesBody = document.getElementById("codesBody");
 const logsBody = document.getElementById("logsBody");
 const generatedOutput = document.getElementById("generatedOutput");
 const logCodeInput = document.getElementById("logCodeInput");
+const exportQrZipButton = document.getElementById("exportQrZipButton");
+const exportFilteredCsvButton = document.getElementById("exportFilteredCsvButton");
+const downloadFilteredQrButton = document.getElementById("downloadFilteredQrButton");
+const downloadGeneratedQrButton = document.getElementById("downloadGeneratedQrButton");
 
 let products = [];
+let lastGeneratedCodes = [];
 
 function showStatus(message, type = "info") {
   adminStatus.textContent = message;
@@ -60,6 +65,42 @@ async function api(path, options = {}) {
 
 function formToObject(form) {
   return Object.fromEntries(new FormData(form).entries());
+}
+
+function codeFilterParams() {
+  const params = new URLSearchParams();
+  if (codeProductFilter.value) params.set("product_id", codeProductFilter.value);
+  if (codeStatusFilter.value) params.set("status", codeStatusFilter.value);
+  if (codeSearchInput.value.trim()) params.set("q", codeSearchInput.value.trim());
+  return params;
+}
+
+function downloadFile(path, params) {
+  const query = params.toString();
+  window.location.href = query ? `${path}?${query}` : path;
+}
+
+async function downloadZipByCodes(codes) {
+  const response = await fetch("/api/admin/qrcodes", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ codes })
+  });
+
+  if (!response.ok) {
+    const contentType = response.headers.get("content-type") || "";
+    const data = contentType.includes("application/json") ? await response.json() : {};
+    throw new Error(data.message || "二维码下载失败");
+  }
+
+  const blob = await response.blob();
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "qr-codes.zip";
+  document.body.appendChild(link);
+  link.click();
+  URL.revokeObjectURL(link.href);
+  link.remove();
 }
 
 async function copyText(text) {
@@ -111,10 +152,7 @@ async function loadProducts() {
 }
 
 async function loadCodes() {
-  const params = new URLSearchParams();
-  if (codeProductFilter.value) params.set("product_id", codeProductFilter.value);
-  if (codeStatusFilter.value) params.set("status", codeStatusFilter.value);
-  if (codeSearchInput.value.trim()) params.set("q", codeSearchInput.value.trim());
+  const params = codeFilterParams();
 
   const data = await api(`/api/admin/codes?${params.toString()}`);
   codesBody.innerHTML = (data.codes || []).map((row) => `
@@ -236,6 +274,8 @@ generateForm.addEventListener("submit", async (event) => {
       method: "POST",
       body: JSON.stringify(formToObject(generateForm))
     });
+    lastGeneratedCodes = data.codes || [];
+    downloadGeneratedQrButton.disabled = lastGeneratedCodes.length === 0;
     generatedOutput.textContent = data.codes.join("\n");
     showStatus(`已生成 ${data.count} 个防伪码`, "success");
     await loadProducts();
@@ -249,7 +289,35 @@ generateForm.addEventListener("submit", async (event) => {
 document.getElementById("exportButton").addEventListener("click", () => {
   const params = new URLSearchParams();
   if (generateProductSelect.value) params.set("product_id", generateProductSelect.value);
-  window.location.href = `/api/admin/export?${params.toString()}`;
+  downloadFile("/api/admin/export", params);
+});
+
+exportQrZipButton.addEventListener("click", () => {
+  const params = new URLSearchParams();
+  if (generateProductSelect.value) params.set("product_id", generateProductSelect.value);
+  downloadFile("/api/admin/qrcodes", params);
+});
+
+downloadGeneratedQrButton.addEventListener("click", async () => {
+  if (!lastGeneratedCodes.length) {
+    showStatus("请先批量生成防伪码", "danger");
+    return;
+  }
+
+  try {
+    await downloadZipByCodes(lastGeneratedCodes);
+    showStatus("本次生成的二维码 ZIP 已开始下载", "success");
+  } catch (error) {
+    showStatus(error.message, "danger");
+  }
+});
+
+exportFilteredCsvButton.addEventListener("click", () => {
+  downloadFile("/api/admin/export", codeFilterParams());
+});
+
+downloadFilteredQrButton.addEventListener("click", () => {
+  downloadFile("/api/admin/qrcodes", codeFilterParams());
 });
 
 document.getElementById("codeFilterForm").addEventListener("submit", async (event) => {
