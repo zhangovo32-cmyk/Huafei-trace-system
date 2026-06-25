@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="230" viewBox="0 0 750 230" role="img" aria-label="enterprise line illustration">
+  <g fill="none" stroke="#a9d4f5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 205h734"/>
+
+    <path d="M42 177h66l20 28H34z"/>
+    <path d="M55 154h42c18 0 32 13 32 29v22H41v-28c0-13 5-23 14-23Z"/>
+    <circle cx="61" cy="205" r="8"/>
+    <circle cx="101" cy="205" r="8"/>
+    <path d="M52 173h18M80 173h18M111 181h16M43 190h84"/>
+
+    <path d="M142 205v-64l55-34 94 47v51"/>
+    <path d="M196 107l95 47 36-29 74 47v33"/>
+    <path d="M171 205v-43l85 22v21"/>
+    <path d="M188 169v36M204 174v31M220 178v27M236 182v23M252 186v19"/>
+    <path d="M276 205v-43h70v43"/>
+    <path d="M292 176h39M292 190h39"/>
+
+    <path d="M399 205V99h33v106M439 205V70h50v135"/>
+    <path d="M407 111h18M407 130h18M407 149h18M407 168h18"/>
+    <path d="M449 88h30M449 109h30M449 130h30M449 151h30"/>
+    <path d="M370 205h154l-40-33H406z"/>
+    <path d="M401 181h82M390 192h114"/>
+
+    <path d="M530 205v-82h10v82M548 205v-82h10v82"/>
+    <path d="M578 205v-60h64v60M592 160h13M619 160h13M592 179h13M619 179h13"/>
+    <path d="M645 205h78l18-18v-27h-56l-32 27"/>
+    <path d="M668 177h58M690 159v-14M711 159v-19"/>
+
+    <path d="M34 136c12-13 29-14 42-2 8-13 29-12 39 1"/>
+    <path d="M536 72c14-21 42-21 56-1 24-6 44 10 41 35h-116c-7-16 4-30 19-34Z"/>
+    <path d="M244 60c26-20 58-18 88 4"/>
+    <path d="M78 90l9 9m0-9-9 9M520 38l10 10m0-10-10 10M682 86l9 9m0-9-9 9"/>
+    <path d="M320 86l12 10 12-10M600 112l12 9 12-9"/>
+    <path d="M18 112h14M720 123h15M353 57h15"/>
+    <circle cx="113" cy="125" r="3" fill="#a9d4f5" stroke="none"/>
+    <circle cx="340" cy="107" r="3" fill="#a9d4f5" stroke="none"/>
+    <circle cx="612" cy="132" r="3" fill="#a9d4f5" stroke="none"/>
+  </g>
+</svg>
