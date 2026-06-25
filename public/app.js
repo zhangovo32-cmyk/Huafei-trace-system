@@ -56,6 +56,11 @@ function displayBrandName(brand) {
   return brand;
 }
 
+function displayManufacturerName(manufacturer) {
+  if (!manufacturer || manufacturer.includes("席士博")) return "云南云天化红磷化工有限公司";
+  return manufacturer;
+}
+
 function setProduct(product) {
   if (!product) {
     productCard.classList.add("is-hidden");
@@ -71,7 +76,7 @@ function setProduct(product) {
   productFields.weight.textContent = product.weight || "--";
   productFields.batch.textContent = product.batch_no || "--";
   productFields.date.textContent = product.production_date || "--";
-  productFields.maker.textContent = product.manufacturer || "--";
+  productFields.maker.textContent = displayManufacturerName(product.manufacturer);
 
   productDetail.textContent = product.description || "暂无更多产品详情。";
   productDetail.classList.add("is-hidden");
