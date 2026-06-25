@@ -26,7 +26,7 @@ function getCodeFromPath() {
   const queryCode = new URLSearchParams(window.location.search).get("code");
   if (queryCode) return queryCode;
 
-  const match = window.location.pathname.match(/\/check\/([^/?#]+)/);
+  const match = window.location.pathname.match(/\/(?:check|c)\/([^/?#]+)/);
   return match ? decodeURIComponent(match[1]) : "";
 }
 
@@ -88,7 +88,10 @@ function setProduct(product) {
     productImage.hidden = true;
     productFallback.hidden = false;
   };
-  productImage.src = product.image_url || "/assets/product-bag.png";
+  const imageUrl = product.image_url || "/assets/product-bag-mobile.webp";
+  productImage.src = imageUrl.includes("/assets/product-bag.png")
+    ? "/assets/product-bag-mobile.webp"
+    : imageUrl;
 }
 
 function setStateCard(data) {

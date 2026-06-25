@@ -42,7 +42,7 @@ export async function onRequestGet(context) {
     ["code", "verify_url", "product_name", "batch_no"],
     ...(result.results || []).map((row) => [
       row.code,
-      `${url.origin}/check/${row.code}`,
+      `${url.origin}/c/${row.code}`,
       row.product_name || "",
       row.batch_no || ""
     ])

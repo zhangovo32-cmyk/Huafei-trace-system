@@ -18,6 +18,8 @@ const exportQrZipButton = document.getElementById("exportQrZipButton");
 const exportFilteredCsvButton = document.getElementById("exportFilteredCsvButton");
 const downloadFilteredQrButton = document.getElementById("downloadFilteredQrButton");
 const downloadGeneratedQrButton = document.getElementById("downloadGeneratedQrButton");
+const printGeneratedQrButton = document.getElementById("printGeneratedQrButton");
+const printFilteredQrButton = document.getElementById("printFilteredQrButton");
 
 let products = [];
 let lastGeneratedCodes = [];
@@ -80,6 +82,11 @@ function downloadFile(path, params) {
   window.location.href = query ? `${path}?${query}` : path;
 }
 
+function openFile(path, params) {
+  const query = params.toString();
+  window.open(query ? `${path}?${query}` : path, "_blank", "noopener");
+}
+
 async function downloadZipByCodes(codes) {
   const response = await fetch("/api/admin/qrcodes", {
     method: "POST",
@@ -101,6 +108,25 @@ async function downloadZipByCodes(codes) {
   link.click();
   URL.revokeObjectURL(link.href);
   link.remove();
+}
+
+async function openPrintByCodes(codes) {
+  const response = await fetch("/api/admin/qrcodes/print", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ codes })
+  });
+
+  if (!response.ok) {
+    const contentType = response.headers.get("content-type") || "";
+    const data = contentType.includes("application/json") ? await response.json() : {};
+    throw new Error(data.message || "打印版生成失败");
+  }
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+  window.open(url, "_blank", "noopener");
+  window.setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
 async function copyText(text) {
@@ -170,8 +196,8 @@ async function loadCodes() {
         </select>
       </td>
       <td>
-        <a href="/check/${row.code}" target="_blank" rel="noreferrer">打开</a>
-        <button type="button" data-copy-url="${window.location.origin}/check/${row.code}">复制</button>
+        <a href="/c/${row.code}" target="_blank" rel="noreferrer">打开</a>
+        <button type="button" data-copy-url="${window.location.origin}/c/${row.code}">复制</button>
       </td>
     </tr>
   `).join("");
@@ -276,6 +302,7 @@ generateForm.addEventListener("submit", async (event) => {
     });
     lastGeneratedCodes = data.codes || [];
     downloadGeneratedQrButton.disabled = lastGeneratedCodes.length === 0;
+    printGeneratedQrButton.disabled = lastGeneratedCodes.length === 0;
     generatedOutput.textContent = data.codes.join("\n");
     showStatus(`已生成 ${data.count} 个防伪码`, "success");
     await loadProducts();
@@ -312,12 +339,30 @@ downloadGeneratedQrButton.addEventListener("click", async () => {
   }
 });
 
+printGeneratedQrButton.addEventListener("click", async () => {
+  if (!lastGeneratedCodes.length) {
+    showStatus("请先批量生成防伪码", "danger");
+    return;
+  }
+
+  try {
+    await openPrintByCodes(lastGeneratedCodes);
+    showStatus("本次生成的二维码印刷版已打开", "success");
+  } catch (error) {
+    showStatus(error.message, "danger");
+  }
+});
+
 exportFilteredCsvButton.addEventListener("click", () => {
   downloadFile("/api/admin/export", codeFilterParams());
 });
 
 downloadFilteredQrButton.addEventListener("click", () => {
   downloadFile("/api/admin/qrcodes", codeFilterParams());
+});
+
+printFilteredQrButton.addEventListener("click", () => {
+  openFile("/api/admin/qrcodes/print", codeFilterParams());
 });
 
 document.getElementById("codeFilterForm").addEventListener("submit", async (event) => {

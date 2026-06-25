@@ -112,7 +112,12 @@ export async function onRequestGet(context) {
   }
 
   const codeRow = await updateScanCount(db, code, scanTime);
-  await writeScanLog(db, context.request, code, scanTime);
+  const logPromise = writeScanLog(db, context.request, code, scanTime);
+  if (typeof context.waitUntil === "function") {
+    context.waitUntil(logPromise);
+  } else {
+    await logPromise;
+  }
 
   if (!codeRow) {
     return json({

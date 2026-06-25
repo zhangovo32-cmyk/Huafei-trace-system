@@ -389,7 +389,7 @@ button:disabled {
   color: #fff;
   background:
     linear-gradient(90deg, rgba(17, 89, 151, 0.88) 0%, rgba(25, 127, 193, 0.72) 48%, rgba(25, 127, 193, 0.2) 100%),
-    url("assets/promo-agriculture.png") center / cover;
+    url("assets/promo-agriculture-mobile.webp") center / cover;
 }
 
 .promo-banner strong {

@@ -1,8 +1,6 @@
-import { requireAdmin } from "../../_shared/auth.js";
-import { badRequest, escapeCsv, readJson } from "../../_shared/http.js";
-import { generateQrSvg } from "../../_shared/qr.js";
-import { buildVerifyUrl, MAX_QR_CODES, printLabelsHtml, safeCodeName } from "../../_shared/qr-print.js";
-import { createZip } from "../../_shared/zip.js";
+import { requireAdmin } from "../../../_shared/auth.js";
+import { badRequest, readJson } from "../../../_shared/http.js";
+import { MAX_QR_CODES, printLabelsHtml } from "../../../_shared/qr-print.js";
 
 function buildCodeFilters(url) {
   const productId = Number.parseInt(url.searchParams.get("product_id") || "", 10);
@@ -32,40 +30,10 @@ function buildCodeFilters(url) {
   };
 }
 
-function zipResponse(url, rows) {
-  const files = [];
-  const manifestRows = [["code", "verify_url", "product_name", "batch_no"]];
-
-  for (const row of rows) {
-    const verifyUrl = buildVerifyUrl(url.origin, row.code);
-    const filename = `${safeCodeName(row.code)}.svg`;
-
-    files.push({
-      name: filename,
-      content: generateQrSvg(verifyUrl)
-    });
-
-    manifestRows.push([
-      row.code,
-      verifyUrl,
-      row.product_name || "",
-      row.batch_no || ""
-    ]);
-  }
-
-  files.unshift({
-    name: "qr-codes.csv",
-    content: `\uFEFF${manifestRows.map((row) => row.map(escapeCsv).join(",")).join("\r\n")}`
-  });
-  files.unshift({
-    name: "print-labels-a4.html",
-    content: printLabelsHtml(url.origin, rows)
-  });
-
-  return new Response(createZip(files), {
+function htmlResponse(url, rows) {
+  return new Response(printLabelsHtml(url.origin, rows), {
     headers: {
-      "content-type": "application/zip",
-      "content-disposition": 'attachment; filename="qr-codes.zip"',
+      "content-type": "text/html; charset=utf-8",
       "cache-control": "no-store"
     }
   });
@@ -84,9 +52,9 @@ export async function onRequestGet(context) {
     .first();
   const total = Number(countRow?.total || 0);
 
-  if (total === 0) return badRequest("没有可下载的防伪码");
+  if (total === 0) return badRequest("没有可打印的防伪码");
   if (total > MAX_QR_CODES) {
-    return badRequest(`一次最多下载 ${MAX_QR_CODES} 个二维码，请先按产品、状态或搜索码缩小范围`, { total });
+    return badRequest(`一次最多打印 ${MAX_QR_CODES} 个二维码，请先缩小筛选范围`, { total });
   }
 
   const result = await context.env.DB
@@ -100,7 +68,7 @@ export async function onRequestGet(context) {
     .bind(...params)
     .all();
 
-  return zipResponse(url, result.results || []);
+  return htmlResponse(url, result.results || []);
 }
 
 export async function onRequestPost(context) {
@@ -114,9 +82,9 @@ export async function onRequestPost(context) {
     : [];
   const uniqueCodes = [...new Set(codes)];
 
-  if (!uniqueCodes.length) return badRequest("没有可下载的防伪码");
+  if (!uniqueCodes.length) return badRequest("没有可打印的防伪码");
   if (uniqueCodes.length > MAX_QR_CODES) {
-    return badRequest(`一次最多下载 ${MAX_QR_CODES} 个二维码，请减少本次选择数量`);
+    return badRequest(`一次最多打印 ${MAX_QR_CODES} 个二维码，请减少本次选择数量`);
   }
 
   const placeholders = uniqueCodes.map(() => "?").join(",");
@@ -132,7 +100,7 @@ export async function onRequestPost(context) {
     .all();
 
   const rows = result.results || [];
-  if (!rows.length) return badRequest("没有找到可下载的防伪码");
+  if (!rows.length) return badRequest("没有找到可打印的防伪码");
 
-  return zipResponse(url, rows);
+  return htmlResponse(url, rows);
 }
