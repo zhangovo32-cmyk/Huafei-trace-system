@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta name="x5-page-mode" content="app">
+    <meta name="browsermode" content="application">
+    <title>真伪查询 - 云天化产品二维码追溯系统</title>
+    <link rel="stylesheet" href="/styles.css?v=20260626-3">
+  </head>
+  <body class="check-body">
+    <main class="verify-shell">
+      <header class="brand-hero" aria-label="品牌区">
+        <div class="brand-row">
+          <img class="brand-logo brand-logo-image" src="/assets/logo-yuntianhua.png" alt="云天化集团">
+          <div class="brand-wordmark" aria-label="云天化股份">
+            <strong>云天化股份</strong>
+            <span>YUNTIANHUA CO.,LTD</span>
+          </div>
+        </div>
+
+        <img class="factory-line" src="/assets/factory-line-full.svg" alt="">
+      </header>
+
+      <section class="verify-panel search-hero">
+        <h1>云天化产品二维码追溯系统</h1>
+        <p class="message-line">请输入包装上的防伪编码进行真伪查询</p>
+      </section>
+
+      <section class="search-card" aria-label="真伪查询">
+        <strong>真伪查询</strong>
+        <form id="manualSearchForm" class="manual-search-form">
+          <input id="manualCode" inputmode="numeric" autocomplete="off" placeholder="请输入防伪编码">
+          <button type="submit">立即查询</button>
+        </form>
+        <p id="manualSearchHint">防伪编码一般为 14-18 位数字，请核对包装标签后输入。</p>
+      </section>
+
+      <a class="contact-us" href="/preview">返回预览页</a>
+      <footer class="trace-footer">© 云南云天化股份有限公司</footer>
+    </main>
+
+    <script>
+      document.getElementById("manualSearchForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        var input = document.getElementById("manualCode");
+        var hint = document.getElementById("manualSearchHint");
+        var code = input.value.replace(/\s+/g, "").trim();
+
+        if (!/^\d{6,24}$/.test(code)) {
+          hint.textContent = "请输入正确的数字防伪编码。";
+          input.focus();
+          return;
+        }
+
+        window.location.href = "/c/" + encodeURIComponent(code);
+      });
+    </script>
+  </body>
+</html>

@@ -671,6 +671,67 @@ button:disabled {
   font-size: clamp(12px, 3vw, 14px);
 }
 
+.search-hero {
+  padding-bottom: clamp(76px, 20vw, 96px);
+}
+
+.search-card {
+  width: min(84vw, 403px);
+  margin: clamp(-72px, -15vw, -58px) auto min(8vw, 38px);
+  padding: clamp(18px, 5vw, 24px);
+  color: #0f172a;
+  border: 1px solid var(--line);
+  border-radius: clamp(5px, 1.2vw, 7px);
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(15, 73, 116, 0.13);
+}
+
+.search-card > strong {
+  display: block;
+  margin-bottom: clamp(14px, 4vw, 19px);
+  color: var(--blue-dark);
+  font-size: clamp(21px, 5.5vw, 26px);
+}
+
+.manual-search-form {
+  display: grid;
+  gap: clamp(12px, 3vw, 14px);
+}
+
+.manual-search-form input,
+.manual-search-form button {
+  width: 100%;
+  min-height: clamp(44px, 12vw, 58px);
+  border-radius: clamp(4px, 1vw, 6px);
+  font-size: clamp(15px, 4vw, 18px);
+}
+
+.manual-search-form input {
+  padding: 0 clamp(12px, 3vw, 14px);
+  color: #111827;
+  border: 1px solid #bfd0e4;
+  outline: none;
+}
+
+.manual-search-form input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(26, 107, 200, 0.14);
+}
+
+.manual-search-form button {
+  color: #fff;
+  font-weight: 800;
+  border: 0;
+  background: linear-gradient(to bottom right, #1a6bc8, #3f97fd);
+}
+
+.search-card p {
+  margin: clamp(12px, 3vw, 14px) 0 0;
+  color: #667085;
+  font-size: clamp(12px, 3.2vw, 15px);
+  line-height: 1.6;
+}
+
 .more-float {
   position: fixed;
   right: max(3vw, calc((100vw - 480px) / 2 + 14px));
