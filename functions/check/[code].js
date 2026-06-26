@@ -9,7 +9,9 @@ export async function onRequest(context) {
     : await fetch(request);
 
   const headers = new Headers(response.headers);
-  headers.set("cache-control", "public, max-age=300");
+  headers.set("cache-control", "no-store, no-cache, must-revalidate, max-age=0");
+  headers.set("pragma", "no-cache");
+  headers.set("expires", "0");
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
