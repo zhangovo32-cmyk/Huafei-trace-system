@@ -266,8 +266,8 @@ button:disabled {
 
 .product-card {
   display: grid;
-  grid-template-columns: minmax(112px, 33vw) minmax(0, 1fr);
-  gap: clamp(18px, 6vw, 29px);
+  grid-template-columns: minmax(112px, 42%) minmax(0, 1fr);
+  gap: clamp(14px, 4vw, 20px);
   align-items: start;
   margin-top: clamp(-96px, -20vw, -76px);
   padding: clamp(14px, 4vw, 19px);
