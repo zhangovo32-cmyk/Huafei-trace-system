@@ -1,5 +1,5 @@
 :root {
-  --blue: #1d73c9;
+  --blue: #1a6bc8;
   --blue-dark: #0f5fb1;
   --blue-soft: #d8ecfb;
   --cyan: #0aaebf;
@@ -52,24 +52,24 @@ button:disabled {
 }
 
 .check-body {
-  background: #eef2f5;
+  background: #f9f9f9;
 }
 
 .verify-shell {
+  position: relative;
   width: 100%;
   max-width: 480px;
   min-height: 100vh;
   margin: 0 auto;
   overflow: hidden;
-  background: #f7f8fa;
+  background: #f9f9f9;
 }
 
 .brand-hero {
   position: relative;
-  height: 188px;
+  height: clamp(122px, 32vw, 154px);
   overflow: hidden;
   background: var(--surface);
-  border-bottom: 1px solid #c9e0f3;
 }
 
 .brand-row {
@@ -77,8 +77,8 @@ button:disabled {
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 22px 24px 0;
+  gap: clamp(7px, 2vw, 10px);
+  padding: clamp(11px, 3vw, 15px) clamp(12px, 3vw, 15px) 0;
 }
 
 .brand-logo {
@@ -88,7 +88,7 @@ button:disabled {
 }
 
 .brand-logo-image {
-  width: 70px;
+  width: clamp(42px, 11vw, 53px);
   flex: 0 0 auto;
 }
 
@@ -101,17 +101,17 @@ button:disabled {
 }
 
 .brand-wordmark strong {
-  font-size: 35px;
+  font-size: clamp(20px, 5.5vw, 26px);
   font-weight: 900;
   letter-spacing: 0;
 }
 
 .brand-wordmark span {
-  margin-top: 6px;
+  margin-top: clamp(2px, 1vw, 4px);
   color: #1187ca;
-  font-size: 15px;
+  font-size: clamp(8px, 2.3vw, 11px);
   font-weight: 800;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.2px;
 }
 
 .brand-mark {
@@ -178,30 +178,31 @@ button:disabled {
 .factory-line {
   position: absolute;
   left: 0;
-  bottom: -7px;
+  bottom: -5px;
   width: 100%;
-  height: 132px;
+  height: clamp(92px, 24vw, 116px);
   object-fit: cover;
   object-position: center bottom;
 }
 
 .verify-panel {
-  padding: 53px 20px 46px;
+  min-height: clamp(190px, 50vw, 240px);
+  padding: clamp(34px, 9vw, 43px) clamp(16px, 5vw, 24px) clamp(88px, 23vw, 112px);
   color: #fff;
   text-align: center;
   background: var(--blue);
 }
 
 .verify-panel h1 {
-  margin: 0 0 35px;
-  font-size: 28px;
+  margin: 0 0 clamp(14px, 4vw, 20px);
+  font-size: clamp(23px, 6vw, 29px);
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.18;
 }
 
 .verify-panel p {
-  margin: 6px 0;
-  font-size: 16px;
+  margin: clamp(3px, 1vw, 5px) 0;
+  font-size: clamp(14px, 4vw, 18px);
   line-height: 1.45;
 }
 
@@ -211,13 +212,13 @@ button:disabled {
 }
 
 .code-line strong {
-  font-size: 18px;
+  font-size: clamp(16px, 4.4vw, 20px);
   font-variant-numeric: tabular-nums;
 }
 
 .scan-line strong {
   color: var(--red);
-  font-size: 19px;
+  font-size: clamp(17px, 4.6vw, 21px);
   font-weight: 800;
 }
 
@@ -235,15 +236,16 @@ button:disabled {
 .state-card,
 .product-card,
 .product-detail {
-  width: calc(100% - 28px);
-  margin: 10px auto 0;
+  width: calc(100% - clamp(30px, 8vw, 38px));
+  margin: 0 auto;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: clamp(4px, 1vw, 6px);
   background: var(--surface);
   box-shadow: 0 4px 15px rgba(15, 73, 116, 0.12);
 }
 
 .state-card {
+  margin-top: -72px;
   padding: 16px;
   color: #92400e;
   background: #fff8ea;
@@ -264,10 +266,16 @@ button:disabled {
 
 .product-card {
   display: grid;
-  grid-template-columns: 42% 58%;
-  gap: 13px;
+  grid-template-columns: minmax(112px, 33vw) minmax(0, 1fr);
+  gap: clamp(18px, 6vw, 29px);
   align-items: start;
-  padding: 18px 16px;
+  margin-top: clamp(-96px, -20vw, -76px);
+  padding: clamp(14px, 4vw, 19px);
+  box-shadow: 0 10px 10px 0 rgba(166, 166, 166, 0.2);
+}
+
+.state-card:not(.is-hidden) ~ .product-card {
+  margin-top: 10px;
 }
 
 .product-card.is-loading {
@@ -282,9 +290,9 @@ button:disabled {
 
 .product-media img {
   width: 100%;
-  max-height: 275px;
+  max-height: clamp(210px, 66vw, 318px);
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .bag-placeholder {
@@ -347,13 +355,13 @@ button:disabled {
 }
 
 .product-info p {
-  margin: 0 0 9px;
-  font-size: 13px;
+  margin: 0 0 clamp(4px, 1vw, 6px);
+  font-size: clamp(11px, 3vw, 14px);
   line-height: 1.35;
 }
 
 .product-info strong {
-  font-size: 14px;
+  font-size: clamp(12px, 3.2vw, 15px);
   font-weight: 800;
 }
 
@@ -365,12 +373,13 @@ button:disabled {
 .more-link {
   padding: 0;
   color: #287fc9;
-  font-size: 14px;
+  font-size: clamp(12px, 3.2vw, 15px);
   background: none;
   border: 0;
 }
 
 .product-detail {
+  margin-top: 10px;
   padding: 14px 16px;
   color: #374151;
   font-size: 14px;
@@ -378,14 +387,14 @@ button:disabled {
 }
 
 .promo-banner {
-  width: calc(100% - 60px);
-  min-height: 88px;
-  margin: 34px auto 24px;
+  width: min(84vw, 403px);
+  min-height: clamp(76px, 20vw, 96px);
+  margin: clamp(24px, 6vw, 29px) auto clamp(18px, 5vw, 24px);
   display: flex;
   align-items: center;
-  padding: 14px 18px;
+  padding: clamp(12px, 3.5vw, 17px);
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: clamp(4px, 1vw, 6px);
   color: #fff;
   background:
     linear-gradient(90deg, rgba(17, 89, 151, 0.88) 0%, rgba(25, 127, 193, 0.72) 48%, rgba(25, 127, 193, 0.2) 100%),
@@ -394,7 +403,7 @@ button:disabled {
 
 .promo-banner strong {
   display: block;
-  font-size: 24px;
+  font-size: clamp(24px, 7vw, 34px);
   line-height: 1.25;
   text-shadow: 0 2px 0 rgba(17, 92, 151, 0.36);
 }
@@ -408,19 +417,19 @@ button:disabled {
 .entry-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  width: calc(100% - 60px);
-  margin: 0 auto 28px;
+  gap: min(4vw, 19px);
+  width: min(84vw, 403px);
+  margin: 0 auto min(4vw, 19px);
 }
 
 .entry-tile {
   position: relative;
-  min-height: 86px;
+  min-height: clamp(92px, 24vw, 116px);
   overflow: hidden;
-  padding: 18px 14px;
+  padding: clamp(8px, 2vw, 10px);
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: clamp(4px, 1vw, 6px);
   box-shadow: 0 5px 13px rgba(16, 120, 121, 0.18);
 }
 
@@ -428,8 +437,8 @@ button:disabled {
   position: relative;
   z-index: 2;
   display: block;
-  max-width: 82px;
-  font-size: 23px;
+  max-width: 72%;
+  font-size: clamp(19px, 5vw, 24px);
   font-weight: 800;
   line-height: 1.25;
 }
@@ -483,6 +492,214 @@ button:disabled {
 
 .tile-teal {
   background: linear-gradient(135deg, #168f83, #27bfa2);
+}
+
+.trace-action {
+  width: min(84vw, 403px);
+  min-height: clamp(76px, 20vw, 96px);
+  margin: 0 auto min(5vw, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  border-radius: clamp(4px, 1vw, 6px);
+}
+
+.trace-inquiry {
+  background: linear-gradient(to bottom right, #1a6bc8, #3f97fd);
+}
+
+.trace-action span {
+  padding-right: min(10vw, 48px);
+  font-size: clamp(27px, 7vw, 34px);
+  font-weight: 800;
+}
+
+.trace-action i {
+  width: clamp(40px, 12vw, 58px);
+  height: clamp(40px, 12vw, 58px);
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.92);
+  font-style: normal;
+  font-size: clamp(28px, 8vw, 38px);
+  border: 4px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+}
+
+.trace-section {
+  width: min(84vw, 403px);
+  margin: 0 auto min(5vw, 24px);
+}
+
+.trace-section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: min(4vw, 19px);
+  color: #1f2937;
+  font-size: clamp(12px, 3vw, 14px);
+}
+
+.trace-section-icon {
+  width: clamp(14px, 4vw, 19px);
+  height: clamp(14px, 4vw, 19px);
+  margin-right: min(1vw, 5px);
+  flex: 0 0 auto;
+  border-radius: 3px;
+  background: var(--blue);
+}
+
+.video-icon {
+  position: relative;
+  border-radius: 50%;
+}
+
+.video-icon::after {
+  position: absolute;
+  left: 39%;
+  top: 28%;
+  content: "";
+  border-left: 6px solid #fff;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.qrcode-icon {
+  background:
+    linear-gradient(#fff 0 0) 33% 33% / 24% 24% no-repeat,
+    linear-gradient(#fff 0 0) 67% 33% / 24% 24% no-repeat,
+    linear-gradient(#fff 0 0) 33% 67% / 24% 24% no-repeat,
+    var(--blue);
+}
+
+.trace-video-card {
+  position: relative;
+  min-height: clamp(132px, 34vw, 164px);
+  margin-bottom: min(4vw, 19px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: clamp(5px, 1.2vw, 7px);
+  isolation: isolate;
+}
+
+.trace-video-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  content: "";
+  background:
+    linear-gradient(135deg, rgba(11, 75, 139, 0.76), rgba(27, 166, 198, 0.38)),
+    radial-gradient(circle at 18% 26%, rgba(255, 255, 255, 0.3), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.23), transparent 24%),
+    linear-gradient(135deg, #1a6bc8, #67c5e8);
+}
+
+.video-card-product::before {
+  background:
+    linear-gradient(135deg, rgba(29, 115, 201, 0.68), rgba(28, 175, 128, 0.34)),
+    radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.28), transparent 27%),
+    radial-gradient(circle at 74% 22%, rgba(255, 255, 255, 0.2), transparent 25%),
+    linear-gradient(135deg, #1f8f55, #4dbbe4);
+}
+
+.trace-video-card span {
+  font-size: clamp(24px, 6vw, 29px);
+  font-weight: 800;
+}
+
+.trace-video-card i {
+  margin-top: clamp(12px, 4vw, 19px);
+  font-style: normal;
+  font-size: clamp(28px, 8vw, 38px);
+  opacity: 0.88;
+}
+
+.trace-qr-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: min(4vw, 19px);
+  text-align: center;
+}
+
+.trace-qr-list span {
+  display: block;
+  min-height: 34px;
+  color: #222;
+  font-size: clamp(12px, 3vw, 14px);
+  line-height: 1.35;
+}
+
+.qr-placeholder {
+  width: min(36vw, 173px);
+  aspect-ratio: 1;
+  margin: min(2vw, 10px) auto 0;
+  border: 8px solid #fff;
+  box-shadow: 0 2px 9px rgba(17, 24, 39, 0.12);
+  background:
+    linear-gradient(90deg, #111 10%, transparent 10% 20%, #111 20% 30%, transparent 30% 45%, #111 45% 55%, transparent 55% 68%, #111 68% 78%, transparent 78%),
+    linear-gradient(#111 9%, transparent 9% 18%, #111 18% 29%, transparent 29% 43%, #111 43% 52%, transparent 52% 66%, #111 66% 75%, transparent 75%);
+  background-color: #fff;
+  background-blend-mode: multiply;
+}
+
+.qr-placeholder.alt {
+  transform: rotate(90deg);
+}
+
+.contact-us {
+  width: min(80vw, 384px);
+  min-height: clamp(38px, 10vw, 48px);
+  margin: min(8vw, 38px) auto min(4vw, 19px);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-decoration: none;
+  background: #007aff;
+  border-radius: clamp(4px, 1vw, 6px);
+}
+
+.trace-footer {
+  padding: min(3vw, 14px) 0 min(5vw, 24px);
+  color: #757575;
+  text-align: center;
+  font-size: clamp(12px, 3vw, 14px);
+}
+
+.more-float {
+  position: fixed;
+  right: max(3vw, calc((100vw - 480px) / 2 + 14px));
+  top: 40%;
+  z-index: 99;
+  width: min(20vw, 96px);
+  height: min(8vw, 38px);
+  display: flex;
+  align-items: center;
+  color: var(--blue);
+  text-decoration: none;
+  background: rgba(210, 210, 210, 0.5);
+  border-radius: min(4vw, 19px);
+  font-size: clamp(12px, 3vw, 14px);
+}
+
+.more-float i {
+  width: min(8vw, 38px);
+  height: min(8vw, 38px);
+  margin-right: min(2vw, 10px);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--blue);
+  font-style: normal;
+  font-size: clamp(10px, 2.5vw, 12px);
+  letter-spacing: -1px;
+  background: rgba(210, 210, 210, 1);
+  border-radius: 50%;
 }
 
 .index-body {
@@ -804,28 +1021,31 @@ td code {
 
 @media (max-width: 390px) {
   .brand-hero {
-    height: 174px;
+    height: 32vw;
+    min-height: 122px;
   }
 
   .brand-row {
-    padding: 20px 18px 0;
-    gap: 10px;
+    padding: 3vw 3vw 0;
+    gap: 2vw;
   }
 
   .brand-logo-image {
-    width: 62px;
+    width: 11vw;
+    min-width: 42px;
   }
 
   .brand-wordmark strong {
-    font-size: 29px;
+    font-size: 5.4vw;
   }
 
   .brand-wordmark span {
-    font-size: 12px;
+    font-size: 2.3vw;
   }
 
   .factory-line {
-    height: 122px;
+    height: 24vw;
+    min-height: 92px;
   }
 
   .brand-copy strong {
@@ -833,7 +1053,7 @@ td code {
   }
 
   .verify-panel h1 {
-    font-size: 24px;
+    font-size: 6vw;
   }
 
   .verify-panel p {
@@ -857,13 +1077,8 @@ td code {
     font-size: 13px;
   }
 
-  .promo-banner,
-  .entry-grid {
-    width: calc(100% - 42px);
-  }
-
   .entry-tile span {
-    font-size: 21px;
+    font-size: 5vw;
   }
 }
 
