@@ -24,6 +24,13 @@ const printFilteredQrButton = document.getElementById("printFilteredQrButton");
 let products = [];
 let lastGeneratedCodes = [];
 
+function buildVerifyUrl(code) {
+  const url = new URL("/check.html", window.location.origin);
+  url.searchParams.set("code", String(code));
+  url.searchParams.set("v", "1");
+  return url.toString();
+}
+
 function showStatus(message, type = "info") {
   adminStatus.textContent = message;
   adminStatus.dataset.type = type;
@@ -182,6 +189,9 @@ async function loadCodes() {
 
   const data = await api(`/api/admin/codes?${params.toString()}`);
   codesBody.innerHTML = (data.codes || []).map((row) => `
+    ${(() => {
+      const verifyUrl = buildVerifyUrl(row.code);
+      return `
     <tr>
       <td><code>${row.code}</code></td>
       <td>${row.product_name || "--"}</td>
@@ -196,10 +206,12 @@ async function loadCodes() {
         </select>
       </td>
       <td>
-        <a href="/c/${row.code}" target="_blank" rel="noreferrer">打开</a>
-        <button type="button" data-copy-url="${window.location.origin}/c/${row.code}">复制</button>
+        <a href="${verifyUrl}" target="_blank" rel="noreferrer">打开</a>
+        <button type="button" data-copy-url="${verifyUrl}">复制</button>
       </td>
     </tr>
+      `;
+    })()}
   `).join("");
 }
 

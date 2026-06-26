@@ -1,5 +1,6 @@
 import { requireAdmin } from "../../_shared/auth.js";
 import { csv, escapeCsv } from "../../_shared/http.js";
+import { buildVerifyUrl } from "../../_shared/qr-print.js";
 
 export async function onRequestGet(context) {
   const auth = await requireAdmin(context);
@@ -42,7 +43,7 @@ export async function onRequestGet(context) {
     ["code", "verify_url", "product_name", "batch_no"],
     ...(result.results || []).map((row) => [
       row.code,
-      `${url.origin}/c/${row.code}`,
+      buildVerifyUrl(url.origin, row.code),
       row.product_name || "",
       row.batch_no || ""
     ])

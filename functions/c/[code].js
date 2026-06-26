@@ -1,6 +1,6 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  url.pathname = "/check";
+  url.pathname = "/check.html";
   url.search = "";
 
   const request = new Request(url.toString(), context.request);

@@ -21,7 +21,7 @@
       document.getElementById("quickCheckForm").addEventListener("submit", function (event) {
         event.preventDefault();
         var code = document.getElementById("quickCode").value.trim();
-        if (code) window.location.href = "/c/" + encodeURIComponent(code);
+        if (code) window.location.href = "/check.html?code=" + encodeURIComponent(code) + "&v=1";
       });
     </script>
   </body>

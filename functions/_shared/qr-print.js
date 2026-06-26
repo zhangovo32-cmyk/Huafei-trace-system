@@ -1,9 +1,13 @@
 import { generateQrSvg } from "./qr.js";
 
 export const MAX_QR_CODES = 2000;
+export const QR_LINK_VERSION = "1";
 
 export function buildVerifyUrl(origin, code) {
-  return `${origin}/c/${encodeURIComponent(String(code))}`;
+  const url = new URL("/check.html", origin);
+  url.searchParams.set("code", String(code));
+  url.searchParams.set("v", QR_LINK_VERSION);
+  return url.toString();
 }
 
 export function safeCodeName(code) {
