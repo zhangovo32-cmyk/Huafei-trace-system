@@ -518,37 +518,32 @@ button:disabled {
 }
 
 .trace-action i {
-  position: relative;
   width: clamp(54px, 15vw, 72px);
   height: clamp(54px, 15vw, 72px);
   flex: 0 0 auto;
-  border: clamp(4px, 1.2vw, 6px) solid rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.08);
   font-style: normal;
 }
 
-.trace-action i::before {
-  position: absolute;
-  left: 18%;
-  top: 16%;
-  width: 43%;
-  height: 43%;
-  content: "";
-  border: clamp(7px, 2vw, 10px) solid #fff;
-  border-radius: 50%;
+.trace-action i svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
 }
 
-.trace-action i::after {
-  position: absolute;
-  right: 18%;
-  bottom: 18%;
-  width: 37%;
-  height: clamp(8px, 2.3vw, 11px);
-  content: "";
-  background: #fff;
-  border-radius: 999px;
-  transform: rotate(45deg);
-  transform-origin: center;
+.trace-action i rect,
+.trace-action i circle,
+.trace-action i path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 10;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.trace-action i path {
+  stroke-width: 12;
+  stroke-linecap: butt;
 }
 
 .trace-section {
