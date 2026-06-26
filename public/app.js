@@ -78,8 +78,6 @@ function setProduct(product) {
   productFields.date.textContent = product.production_date || "--";
   productFields.maker.textContent = displayManufacturerName(product.manufacturer);
 
-  productDetail.textContent = product.description || "暂无更多产品详情。";
-  productDetail.classList.add("is-hidden");
   moreButton.textContent = "点击查看更多...";
 
   productImage.hidden = false;
@@ -139,10 +137,7 @@ async function loadVerification() {
 }
 
 moreButton.addEventListener("click", () => {
-  productDetail.classList.toggle("is-hidden");
-  moreButton.textContent = productDetail.classList.contains("is-hidden")
-    ? "点击查看更多..."
-    : "收起产品详情";
+  window.location.href = "/product-detail";
 });
 
 loadVerification();

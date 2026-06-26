@@ -9,8 +9,5 @@ productImage.addEventListener("error", () => {
 });
 
 moreButton.addEventListener("click", () => {
-  productDetail.classList.toggle("is-hidden");
-  moreButton.textContent = productDetail.classList.contains("is-hidden")
-    ? "点击查看更多..."
-    : "收起产品详情";
+  window.location.href = "/product-detail";
 });

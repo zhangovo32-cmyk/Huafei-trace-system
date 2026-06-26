@@ -854,6 +854,212 @@ button:disabled {
   font-size: 14px;
 }
 
+.detail-body {
+  margin: 0;
+  background: #f2f2f2;
+}
+
+.detail-shell {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fff;
+}
+
+.detail-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: clamp(45px, 11vw, 53px);
+  display: grid;
+  grid-template-columns: 54px 1fr 54px;
+  align-items: center;
+  color: #050505;
+  background: #fff;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.detail-nav strong {
+  grid-column: 2;
+  text-align: center;
+  font-size: clamp(20px, 5.2vw, 25px);
+  font-weight: 500;
+}
+
+.detail-nav a {
+  position: relative;
+  width: 54px;
+  height: 100%;
+  display: block;
+}
+
+.detail-nav a::before {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border-left: 4px solid #111;
+  border-bottom: 4px solid #111;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.detail-farm-hero {
+  position: relative;
+  height: clamp(200px, 52vw, 250px);
+  overflow: hidden;
+  background: linear-gradient(180deg, #4bb9f2 0%, #9ee6ff 42%, #f6cd38 43%, #dcae22 100%);
+}
+
+.detail-hero-sky {
+  position: absolute;
+  inset: 0 0 36%;
+  background:
+    radial-gradient(circle at 18% 32%, rgba(255, 255, 255, 0.8) 0 6%, transparent 7%),
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.62) 0 8%, transparent 9%),
+    linear-gradient(180deg, #28a7ef, #9bdfff);
+}
+
+.detail-hero-field {
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: -14%;
+  height: 66%;
+  background:
+    repeating-linear-gradient(105deg, rgba(77, 132, 18, 0.42) 0 8px, rgba(255, 220, 59, 0.18) 8px 18px),
+    linear-gradient(160deg, #5e9c23 0%, #e5c337 45%, #c58d14 100%);
+  transform: skewY(-5deg);
+}
+
+.detail-hero-person {
+  position: absolute;
+  left: 11%;
+  bottom: 12%;
+  width: 36px;
+  height: 92px;
+  border-radius: 18px 18px 4px 4px;
+  background: linear-gradient(#fff 0 36%, #1687c8 36% 72%, #193b66 72%);
+  box-shadow:
+    14px -42px 0 -9px #fff,
+    20px -58px 0 -14px #f8d7b4,
+    28px -24px 0 -14px #fff,
+    -16px -20px 0 -14px #fff;
+}
+
+.detail-hero-banner {
+  position: absolute;
+  left: 31%;
+  top: 27%;
+  padding: 7px 18px;
+  color: #fff;
+  font-size: clamp(16px, 4.1vw, 20px);
+  font-weight: 800;
+  background: linear-gradient(90deg, #16a34a, #6abf2c);
+  transform: rotate(-6deg) skewX(-12deg);
+  box-shadow: 0 3px 8px rgba(26, 83, 30, 0.25);
+}
+
+.detail-hero-badges {
+  position: absolute;
+  right: 9%;
+  bottom: 18%;
+  display: flex;
+  gap: 8px;
+}
+
+.detail-hero-badges span {
+  width: clamp(32px, 8vw, 38px);
+  height: clamp(32px, 8vw, 38px);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 10px;
+  border: 3px solid #e6ffe8;
+  border-radius: 50%;
+  background: #1d9d50;
+}
+
+.detail-content {
+  padding: clamp(22px, 6vw, 29px) clamp(20px, 5vw, 24px) clamp(34px, 9vw, 43px);
+}
+
+.detail-fields {
+  margin: 0;
+}
+
+.detail-fields dt,
+.detail-section h2 {
+  margin: 0 0 clamp(8px, 2vw, 10px);
+  color: #060606;
+  font-size: clamp(20px, 5.4vw, 26px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.detail-fields dd {
+  margin: 0 0 clamp(16px, 4vw, 19px);
+  color: #8a8a8a;
+  font-size: clamp(20px, 5.2vw, 25px);
+  line-height: 1.45;
+}
+
+.detail-section {
+  margin-top: clamp(18px, 5vw, 24px);
+}
+
+.detail-section p {
+  margin: 0 0 clamp(9px, 2.4vw, 12px);
+  color: #828282;
+  font-size: clamp(19px, 4.9vw, 24px);
+  line-height: 1.65;
+  text-align: justify;
+}
+
+.detail-section-icon h2 {
+  position: relative;
+  padding-left: 30px;
+}
+
+.detail-section-icon h2::before {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 22px;
+  height: 22px;
+  content: "";
+}
+
+.use-icon h2::before {
+  border-left: 4px solid #16a7b8;
+  border-bottom: 4px solid #16a7b8;
+  transform: rotate(-45deg);
+}
+
+.info-icon h2::before {
+  background:
+    linear-gradient(#54c789 0 0) 0 0 / 9px 9px no-repeat,
+    linear-gradient(#54c789 0 0) 13px 0 / 9px 9px no-repeat,
+    linear-gradient(#54c789 0 0) 0 13px / 9px 9px no-repeat,
+    linear-gradient(#54c789 0 0) 13px 13px / 9px 9px no-repeat;
+}
+
+.feedback-button {
+  width: min(82vw, 394px);
+  min-height: clamp(50px, 13vw, 62px);
+  margin: clamp(32px, 9vw, 43px) auto 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(18px, 4.7vw, 23px);
+  background: #28b6c4;
+  border-radius: 999px;
+}
+
 .admin-body {
   background: #f3f5f7;
 }
