@@ -912,9 +912,11 @@ button:disabled {
 
 .detail-farm-hero {
   position: relative;
-  height: clamp(200px, 52vw, 250px);
+  height: clamp(190px, 42vw, 205px);
   overflow: hidden;
-  background: linear-gradient(180deg, #4bb9f2 0%, #9ee6ff 42%, #f6cd38 43%, #dcae22 100%);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)),
+    url("/assets/detail-farm-hero.webp") center / cover no-repeat;
 }
 
 .detail-hero-sky {
@@ -955,35 +957,54 @@ button:disabled {
 
 .detail-hero-banner {
   position: absolute;
-  left: 31%;
+  left: 30%;
   top: 27%;
-  padding: 7px 18px;
+  min-width: clamp(210px, 54vw, 260px);
+  padding: clamp(6px, 1.7vw, 8px) clamp(12px, 3.2vw, 16px);
   color: #fff;
-  font-size: clamp(16px, 4.1vw, 20px);
+  text-align: center;
+  font-size: clamp(15px, 4vw, 19px);
   font-weight: 800;
   background: linear-gradient(90deg, #16a34a, #6abf2c);
   transform: rotate(-6deg) skewX(-12deg);
   box-shadow: 0 3px 8px rgba(26, 83, 30, 0.25);
 }
 
+.detail-hero-banner::after {
+  position: absolute;
+  right: -17px;
+  top: 0;
+  width: 22px;
+  height: 100%;
+  content: "";
+  background: #6abf2c;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
 .detail-hero-badges {
   position: absolute;
-  right: 9%;
-  bottom: 18%;
+  right: 7%;
+  bottom: 16%;
   display: flex;
-  gap: 8px;
+  gap: clamp(5px, 1.5vw, 7px);
 }
 
 .detail-hero-badges span {
-  width: clamp(32px, 8vw, 38px);
-  height: clamp(32px, 8vw, 38px);
+  width: clamp(30px, 7.6vw, 36px);
+  height: clamp(30px, 7.6vw, 36px);
   display: grid;
   place-items: center;
   color: #fff;
-  font-size: 10px;
+  text-align: center;
+  font-size: clamp(7px, 1.9vw, 9px);
+  font-weight: 800;
+  line-height: 1.05;
   border: 3px solid #e6ffe8;
   border-radius: 50%;
-  background: #1d9d50;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.18) 0 32%, transparent 34%),
+    #1d9d50;
+  box-shadow: 0 2px 4px rgba(0, 82, 35, 0.18);
 }
 
 .detail-content {
