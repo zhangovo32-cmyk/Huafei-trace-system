@@ -25,7 +25,7 @@ let products = [];
 let lastGeneratedCodes = [];
 
 function buildVerifyUrl(code) {
-  const url = new URL("/check.html", window.location.origin);
+  const url = new URL("/check", window.location.origin);
   url.searchParams.set("code", String(code));
   url.searchParams.set("v", "1");
   return url.toString();

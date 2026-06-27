@@ -1,20 +1,12 @@
+import { QR_LINK_VERSION } from "../_shared/qr-print.js";
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  url.pathname = "/check.html";
+  const code = context.params?.code || url.pathname.split("/").filter(Boolean).pop();
+  url.pathname = "/check";
   url.search = "";
+  if (code) url.searchParams.set("code", String(code));
+  url.searchParams.set("v", QR_LINK_VERSION);
 
-  const request = new Request(url.toString(), context.request);
-  const response = context.env?.ASSETS?.fetch
-    ? await context.env.ASSETS.fetch(request)
-    : await fetch(request);
-
-  const headers = new Headers(response.headers);
-  headers.set("cache-control", "no-store, no-cache, must-revalidate, max-age=0");
-  headers.set("pragma", "no-cache");
-  headers.set("expires", "0");
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers
-  });
+  return Response.redirect(url.toString(), 302);
 }

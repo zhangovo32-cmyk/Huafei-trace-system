@@ -4,7 +4,7 @@ export const MAX_QR_CODES = 2000;
 export const QR_LINK_VERSION = "1";
 
 export function buildVerifyUrl(origin, code) {
-  const url = new URL("/check.html", origin);
+  const url = new URL("/check", origin);
   url.searchParams.set("code", String(code));
   url.searchParams.set("v", QR_LINK_VERSION);
   return url.toString();
