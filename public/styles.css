@@ -371,11 +371,14 @@ button:disabled {
 }
 
 .more-link {
+  display: inline-block;
   padding: 0;
   color: #287fc9;
   font-size: clamp(12px, 3.2vw, 15px);
+  text-decoration: none;
   background: none;
   border: 0;
+  cursor: pointer;
 }
 
 .product-detail {

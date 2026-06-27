@@ -136,8 +136,10 @@ async function loadVerification() {
   }
 }
 
-moreButton.addEventListener("click", () => {
-  window.location.href = "/product-detail";
-});
+if (moreButton && moreButton.tagName === "BUTTON") {
+  moreButton.addEventListener("click", () => {
+    window.location.href = "/product-detail";
+  });
+}
 
 loadVerification();
