@@ -138,7 +138,7 @@ async function loadVerification() {
 
 if (moreButton && moreButton.tagName === "BUTTON") {
   moreButton.addEventListener("click", () => {
-    window.location.href = "/product-detail.html";
+    window.location.href = "/product-detail";
   });
 }
 
