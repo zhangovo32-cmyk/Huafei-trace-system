@@ -8,7 +8,7 @@
     <meta name="x5-page-mode" content="app">
     <meta name="browsermode" content="application">
     <title>云天化产品二维码追溯系统</title>
-    <link rel="stylesheet" href="/styles.css?v=20260627-2">
+    <link rel="stylesheet" href="/styles.css?v=20260629-1">
   </head>
   <body class="check-body">
     <main class="verify-shell">
@@ -98,14 +98,14 @@
           <span class="trace-section-icon video-icon" aria-hidden="true"></span>
           <strong>热点视频</strong>
         </div>
-        <div class="trace-video-card video-card-company">
+        <button class="trace-video-card video-card-company" type="button" data-video-title="企业宣传视频" data-video-src="/api/video/company" data-video-poster="/assets/trace-video-company.jpg">
           <span>企业宣传视频</span>
-          <i aria-hidden="true">▶</i>
-        </div>
-        <div class="trace-video-card video-card-product">
+          <i aria-hidden="true"></i>
+        </button>
+        <button class="trace-video-card video-card-product" type="button" data-video-title="产品宣传视频" data-video-src="/api/video/product" data-video-poster="/assets/trace-video-product.jpg">
           <span>产品宣传视频</span>
-          <i aria-hidden="true">▶</i>
-        </div>
+          <i aria-hidden="true"></i>
+        </button>
       </section>
 
       <section class="trace-section trace-qrcode" aria-label="扫码关注">
@@ -116,11 +116,11 @@
         <div class="trace-qr-list">
           <div>
             <span>云天化农分享公众号</span>
-            <div class="qr-placeholder" aria-hidden="true"></div>
+            <img class="qr-image" src="/assets/trace-qr-gongzhonghao.jpg" alt="云天化农分享公众号二维码" loading="lazy" decoding="async">
           </div>
           <div>
             <span>云天化农分享微信视频号</span>
-            <div class="qr-placeholder alt" aria-hidden="true"></div>
+            <img class="qr-image" src="/assets/trace-qr-shipinhao.jpg" alt="云天化农分享微信视频号二维码" loading="lazy" decoding="async">
           </div>
         </div>
       </section>
@@ -133,6 +133,15 @@
       </a>
     </main>
 
-    <script src="/app.js?v=20260627-2" defer></script>
+    <div class="video-modal is-hidden" id="videoModal" aria-hidden="true">
+      <div class="video-modal-panel" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+        <button class="video-modal-close" type="button" id="videoModalClose" aria-label="关闭视频">×</button>
+        <h2 id="videoModalTitle">热点视频</h2>
+        <video id="traceVideoPlayer" controls playsinline webkit-playsinline x5-video-player-type="h5-page" preload="metadata"></video>
+        <a class="video-open-link" id="videoOpenLink" href="#" target="_blank" rel="noopener">打不开时点这里播放</a>
+      </div>
+    </div>
+
+    <script src="/app.js?v=20260629-1" defer></script>
   </body>
 </html>
