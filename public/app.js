@@ -169,6 +169,11 @@ function setupTraceVideos() {
       const label = button.dataset.videoTitle || "热点视频";
       const poster = button.dataset.videoPoster || "";
 
+      if (window.location.protocol === "https:" && src.startsWith("http://")) {
+        window.location.href = src;
+        return;
+      }
+
       if (title) title.textContent = label;
       if (poster) player.setAttribute("poster", poster);
       player.src = src;
