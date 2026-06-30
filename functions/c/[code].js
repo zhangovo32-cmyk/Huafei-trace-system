@@ -3,10 +3,20 @@ export async function onRequest(context) {
   url.pathname = "/check.html";
   url.search = "";
 
-  const request = new Request(url.toString(), context.request);
-  const response = context.env?.ASSETS?.fetch
+  let request = new Request(url.toString(), context.request);
+  let response = context.env?.ASSETS?.fetch
     ? await context.env.ASSETS.fetch(request)
     : await fetch(request);
+
+  for (let i = 0; i < 3 && [301, 302, 307, 308].includes(response.status); i += 1) {
+    const location = response.headers.get("location");
+    if (!location) break;
+    const nextUrl = new URL(location, url);
+    request = new Request(nextUrl.toString(), context.request);
+    response = context.env?.ASSETS?.fetch
+      ? await context.env.ASSETS.fetch(request)
+      : await fetch(request);
+  }
 
   const headers = new Headers(response.headers);
   headers.set("cache-control", "no-store, no-cache, must-revalidate, max-age=0");
